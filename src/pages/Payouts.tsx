@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Wallet, Smartphone, History, TrendingUp } from 'lucide-react';
+import { useState } from 'react';
+import { Smartphone, History, TrendingUp } from 'lucide-react';
 
 export default function Payouts() {
   const [tab, setTab] = useState('Pending');

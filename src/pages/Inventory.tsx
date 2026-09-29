@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { UploadCloud, FileSpreadsheet, CheckCircle } from 'lucide-react';
 
 export default function Inventory() {

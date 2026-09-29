@@ -19,6 +19,7 @@ export default function Vendors() {
     async function fetchVendors() {
       try {
         const { data, error } = await supabase.from('restaurants').select('*');
+        if (error) console.warn('Could not load vendors; showing sample data.', error.message);
         if (data && data.length > 0) {
           const mapped = data.map(d => ({
             id: d.id,

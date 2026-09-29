@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Settings as SettingsIcon, Clock, ShieldAlert, Database } from 'lucide-react';
 import { SITE } from '../config/site';
 import { isSupabaseConfigured, testSupabaseRead } from '../lib/supabase';

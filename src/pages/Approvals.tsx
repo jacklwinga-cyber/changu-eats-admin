@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import type React from 'react';
 import { CheckCircle, XCircle, Eye, Edit, X } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
@@ -17,14 +18,17 @@ export default function Approvals() {
     async function fetchCouriers() {
       try {
         const { data, error } = await supabase.from('profiles').select('*').eq('role', 'courier');
+        if (error) console.warn('Could not load couriers; showing sample data.', error.message);
         if (data && data.length > 0) {
           // Map DB columns to our UI state
+          // Keys must match the table/modals: vehicle, licensePlate, date
           const mapped = data.map(d => ({
-            id: d.id,
+            id: String(d.id),
             name: `${d.first_name || ''} ${d.last_name || ''}`.trim(),
-            type: d.vehicle_type || 'Unknown',
             phone: d.phone_number || 'N/A',
-            applied: new Date(d.created_at).toLocaleDateString(),
+            vehicle: d.vehicle_type || 'Unknown',
+            licensePlate: d.license_plate || 'N/A',
+            date: d.created_at ? String(d.created_at).slice(0, 10) : '',
             status: d.is_verified ? 'Approved' : 'Pending',
           }));
           setCouriers(mapped);
